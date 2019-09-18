@@ -1,0 +1,10 @@
+.dockerignore
+.git
+.gitignore
+Dockerfile
+Makefile
+docker-compose.yml
+node_modules
+tslint.json
+
+*.log

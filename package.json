@@ -1,0 +1,50 @@
+{
+  "name": "media-service",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "license": "MIT",
+  "scripts": {
+    "tslint": "tslint",
+    "tsc": "tsc",
+    "start:dev": "ts-node-dev --no-notify --respawn --transpileOnly src/main.ts",
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "buildX": "tsc -p tsconfig.build.json",
+    "startX": "ts-node -r tsconfig-paths/register src/main.ts",
+    "start:devX": "tsc-watch -p tsconfig.build.json --preserveWatchOutput --onSuccess \"node dist/main.js\"",
+    "start:debugX": "tsc-watch -p tsconfig.build.json --preserveWatchOutput --onSuccess \"node --inspect-brk dist/main.js\"",
+    "start:prodX": "node dist/main.js"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.5",
+    "@types/sharp": "^0.22.2",
+    "@types/supertest": "^2.0.8",
+    "jest": "^24.9.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.1.0",
+    "ts-node-dev": "^1.0.0-pre.42",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "memoizee": "^0.4.14",
+    "sharp": "^0.23.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}

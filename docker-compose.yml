@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+
+    backend:
+        build:
+            context: .
+            target: dev
+        depends_on:
+            - azurite
+        ports:
+            - 8080:3000
+        volumes:
+            - ./src:/app/src
+            - ./test:/app/test
+            - ./tsconfig.json:/app/tsconfig.json
+        environment:
+            STORAGE_STRATEGY: ${STORAGE_STRATEGY:-azurite}
+            AZURE_STORAGE_ACCOUNT: ${AZURE_STORAGE_ACCOUNT:-devstoreaccount1}
+            AZURE_STORAGE_ACCESS_KEY: ${AZURE_STORAGE_ACCESS_KEY:-Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==}
+            AZURE_STORAGE_CONTAINER: ${AZURE_STORAGE_CONTAINER:-dev}
+            AZURE_STORAGE_HOST: ${AZURE_STORAGE_HOST:-http://azurite:10000}
+
+    azurite:
+        image: mcr.microsoft.com/azure-storage/azurite
+        restart: always
+        volumes:
+            - azurite-datavolume:/data
+
+volumes:
+    azurite-datavolume:
